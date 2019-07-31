@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block title %}Post Feed{% endblock %}
+
+{% block content %}
+{% for post in post_list %}
+    <div class="post" style="border: 1px solid black; margin: 5px">
+        <p>{{post.author.username}} posted at {{post.pub_time}}:</p>
+        <pre><p>{{post.text}}</p></pre>
+    </div>
+{% endfor %}
+{% endblock %}
