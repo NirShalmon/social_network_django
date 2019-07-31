@@ -9,10 +9,10 @@ verify_ssl = true
 django = "*"
 psycopg2 = "*"
 python-decouple = "*"
-whitenoise = "*"
 dj-database-url = "*"
 pillow = "*"
 gunicorn = "*"
+whitenoise = "~=3.3"
 
 [requires]
 python_version = "3.6"
