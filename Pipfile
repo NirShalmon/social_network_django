@@ -7,12 +7,12 @@ verify_ssl = true
 
 [packages]
 django = "*"
-psycopg2 = "*"
 python-decouple = "*"
 dj-database-url = "*"
 pillow = "*"
 gunicorn = "*"
 whitenoise = "~=3.3"
+psycopg2 = "~=2.8"
 
 [requires]
 python_version = "3.6"
