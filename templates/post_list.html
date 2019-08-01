@@ -1,12 +1,21 @@
 {% extends 'base.html' %}
 
 {% block title %}Post Feed{% endblock %}
+{% block head_extra %}<script src="/static/post_list_script.js"></script>{% endblock %}
 
 {% block content %}
-{% for post in post_list %}
-    <div class="post" style="border: 1px solid black; margin: 5px">
+{% for post,is_liked in post_list %}
+    <div class="post" id="{{post.pk}}" style="border: 1px solid black; margin: 5px">
         <p>{{post.author.username}} posted at {{post.pub_time}}:</p>
         <pre><p>{{post.text}}</p></pre>
+        <p>{{post.likes.count}} like{{post.likes.count|pluralize}}.
+            {% if not is_liked %}
+                <a href="#" class="like_unlike_button">like</a>
+            {% else %}
+                <a href="#" class="like_unlike_button">unlike</a>
+            {% endif %}
+            <a href="{% url 'likes' %}?post_id={{post.pk}}">See likes</a>.
+        </p>
     </div>
 {% endfor %}
 {% endblock %}

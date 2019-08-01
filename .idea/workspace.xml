@@ -3,6 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="59ebe1b8-99c8-441a-a5d5-6c2deb650ace" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialnet/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/socialnet/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialnet/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/socialnet/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialnet/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/socialnet/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/socialnet_project/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/socialnet_project/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/post_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/post_list.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -30,6 +36,8 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/static" />
+      <recent name="$PROJECT_DIR$/staticfiles" />
       <recent name="$PROJECT_DIR$/templates" />
       <recent name="$PROJECT_DIR$/templates/socialnet" />
     </key>

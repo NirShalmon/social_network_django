@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Post Feed{% endblock %}
+
+{% block content %}
+{% if customuser_list %}
+    <ul>
+        {% for user in customuser_list %}
+            <li>{{user.username}}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>No likes.</p>
+{% endif %}
+{% endblock %}

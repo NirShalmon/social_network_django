@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-import dj_database_url       # Place this line preferably at the top
+import dj_database_url  # Place this line preferably at the top
 from decouple import config  # Place this line preferably at the top
 
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 
-ALLOWED_HOSTS = ['socialnet-django.herokuapp.com','localhost','0.0.0.0']
+ALLOWED_HOSTS = ['socialnet-django.herokuapp.com', 'localhost', '0.0.0.0', '127.0.0.1']
 
 # Application definition
 
@@ -122,7 +122,7 @@ STATIC_URL = '/static/'
 os.makedirs(STATIC_TMP, exist_ok=True)
 os.makedirs(STATIC_ROOT, exist_ok=True)
 
-#STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
@@ -132,7 +132,7 @@ MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Configure Django App for Heroku.
-#django_heroku.settings(locals())
+# django_heroku.settings(locals())
 
 LOGIN_URL = 'home'
 LOGIN_REDIRECT_URL = 'home'

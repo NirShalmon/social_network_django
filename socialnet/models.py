@@ -12,6 +12,9 @@ class PublishedText(models.Model):
     )
     text = models.CharField(max_length=50000, verbose_name="Post Text Contents")
     pub_time = models.DateTimeField('Publication time', default=timezone.now)
+    likes = models.ManyToManyField(get_user_model(),
+                                   related_name="%(app_label)s_%(class)s_like_set",
+                                   related_query_name="%(app_label)s_%(class)s_likes")
 
     class Meta:
         abstract = True
