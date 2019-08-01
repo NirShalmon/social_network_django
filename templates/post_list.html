@@ -8,7 +8,8 @@
     <div class="post" id="{{post.pk}}" style="border: 1px solid black; margin: 5px">
         <p>{{post.author.username}} posted at {{post.pub_time}}:</p>
         <pre><p>{{post.text}}</p></pre>
-        <p>{{post.likes.count}} like{{post.likes.count|pluralize}}.
+        <script>like_counts.set("{{post.pk}}",{{post.likes.count}});</script>
+        <p><span class="like_count"></span>
             {% if not is_liked %}
                 <a href="#" class="like_unlike_button">like</a>
             {% else %}
