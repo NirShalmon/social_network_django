@@ -28,7 +28,15 @@ function on_like_unlike(){
 }
 
 function set_like_count(){
-    $(this).text(like_counts.get($(this).closest('div').attr('id')));
+    var post_id = $(this).closest('div').attr('id');
+    var like_count = like_counts.get(post_id);
+    var like_text = like_count.toString();
+    if(like_count == 1){
+        like_text += " like";
+    }else{
+        like_text += " likes";
+    }
+    $(this).text(like_text);
 }
 
 $(document).ready(function(){
