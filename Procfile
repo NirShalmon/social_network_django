@@ -1,1 +1,1 @@
-web: gunicorn <project name>.wsgi --log-file -
+web: gunicorn socialnet_project.wsgi --log-file -
