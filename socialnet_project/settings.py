@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 
-ALLOWED_HOSTS = ['socialnet-django.herokuapp.com', 'localhost', '0.0.0.0', '127.0.0.1']
+ALLOWED_HOSTS = ['socialnet-django.herokuapp.com', 'localhost', '0.0.0.0', '127.0.0.1', 'socialnet.nirshalmon.tech']
 
 # Application definition
 
