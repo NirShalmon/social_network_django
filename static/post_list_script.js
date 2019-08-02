@@ -7,10 +7,11 @@ function get_post_id(){
 function on_like_unlike(){
     var post_id = get_post_id.call(this);
     var like_count = like_counts.get(post_id);
+    var post_id_num = post_id.split('_')[1];
     if($(this).text().trim() == 'like'){
         $.post("/like/",
         {
-            post_id: post_id,
+            post_id: post_id_num,
             csrfmiddlewaretoken: token,
         }
         );
@@ -19,7 +20,7 @@ function on_like_unlike(){
      }else{
         $.post("/unlike/",
         {
-            post_id: post_id,
+            post_id: post_id_num,
             csrfmiddlewaretoken: token,
         }
        );
