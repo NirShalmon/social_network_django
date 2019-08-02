@@ -1,19 +1,68 @@
 <!-- templates/base.html -->
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <!-- Jquery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Bootstrap4 -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <!-- Popper JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script>
     token = "{{ csrf_token }}";
-  </script>
-  {% block head_extra %}{% endblock %}
-  <title>{% block title %}Social Network{% endblock %}</title>
+    </script>
+    {% block head_extra %}{% endblock %}
+    <title>{% block title %}Social Network{% endblock %}</title>
 </head>
 <body>
-  <main>
-    {% block content %}
-    {% endblock %}
-  </main>
+    <div class="container">
+        <nav class="nav nav-tabs navbar-light bg-light navbar-expand-lg">
+            <li class="nav-item">
+                <a href="{% url 'posts' %}" class="nav-link">
+                    posts
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{% url 'new post' %}" class="nav-link">
+                    new post
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    about
+                </a>
+            </li>
+            {% if user.is_authenticated %}
+                <li class="navbar-text">
+                    Welcome, {{user.username}}
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'logout' %}" class="nav-link">
+                        logout
+                    </a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a href="{% url 'login' %}" class="nav-link">
+                        login
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{% url 'signup' %}" class="nav-link">
+                        signup
+                    </a>
+                </li>
+            {% endif %}
+        </nav>
+        <main>
+            {% block content %}
+            {% endblock %}
+        </main>
+    </div>
 </body>
 </html>
