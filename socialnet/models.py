@@ -1,6 +1,8 @@
 import datetime
 
 from django.contrib.auth import get_user_model
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelation
 from django.db import models
 from django.utils import timezone
 
@@ -16,9 +18,6 @@ class PublishedText(models.Model):
                                    related_name="%(app_label)s_%(class)s_like_set",
                                    related_query_name="%(app_label)s_%(class)s_likes")
 
-    class Meta:
-        abstract = True
-
     def __str__(self):
         return f"({self.author.username},{str(self.pub_time)},{self.text[:20]})"
 
@@ -28,4 +27,4 @@ class Post(PublishedText):
 
 
 class Comment(PublishedText):
-    post = models.ForeignKey('Post', on_delete=models.CASCADE)
+    parent_content = models.ForeignKey(PublishedText, on_delete=models.CASCADE, related_name='comment_set')

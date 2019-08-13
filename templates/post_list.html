@@ -1,21 +1,58 @@
 {% extends 'base.html' %}
 
 {% block title %}Post Feed{% endblock %}
-{% block head_extra %}<script src="/static/post_list_script.js"></script>{% endblock %}
+{% block head_extra %}<script src="/static/post_list_script.js"></script>
+<style>
+.post-comments {
+  padding-bottom: 9px;
+  margin: 5px 0 5px;
+}
+
+.comments-nav {
+  border-bottom: 1px solid #eee;
+  margin-bottom: 5px;
+}
+
+.post-comments .comment-meta {
+  border-bottom: 1px solid #eee;
+  margin-bottom: 5px;
+}
+
+.post-comments .media {
+  border-left: 1px dotted #000;
+  border-bottom: 1px dotted #000;
+  margin-bottom: 5px;
+  padding-left: 10px;
+}
+
+.post-comments .media-heading {
+  font-size: 12px;
+  color: grey;
+}
+
+.post-comments .comment-meta a {
+  font-size: 12px;
+  color: grey;
+  font-weight: bolder;
+  margin-right: 5px;
+}
+</style>
+
+{% endblock %}
 
 {% block content %}
 {% for post,is_liked in post_list %}
-    <script>like_counts.set("post_{{post.pk}}",{{post.likes.count}});</script>
-    <div class="card post" id="post_{{post.pk}}">
-        <div class="card-head">
-            <p>{{post.author.username}} posted at {{post.pub_time}}:</p>
-        </div>
-        <div class="card-body">
-            <pre><p>{{post.text}}</p></pre>
-        </div>
-        <div class="card-footer">
-            <span class="like_count card-text"></span>
-            <span class="btn-group btn-group-sm">
+<script>like_counts.set("post_{{post.pk}}",{{post.likes.count}});</script>
+<div class="card post" id="post_{{post.pk}}">
+    <div class="card-head">
+        <p>{{post.author.username}} posted at {{post.pub_time}}:</p>
+    </div>
+    <div class="card-body">
+        <pre><p>{{post.text}}</p></pre>
+    </div>
+    <div class="card-footer">
+        <span class="like_count card-text"></span>
+        <span class="btn-group btn-group-sm">
                 <button class="like_unlike_button btn btn-primary" type="button">
                     {% if not is_liked %}
                         like
@@ -25,7 +62,24 @@
                 </button>
                 <a href="{% url 'likes' %}?post_id={{post.pk}}" class="btn btn-info">See likes</a>
             </span>
+        <div class="post-comments">
+
+            <form method="post" action="/comment/">
+                <div class="form-group">
+                    <label for="comment">Your Comment</label>
+                    <textarea name="comment" class="form-control" rows="3"></textarea>
+                </div>
+                <input type="hidden" name="post_id" value="{{ post.pk }}">
+                <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+                <button type="submit" class="btn btn-primary">Send</button>
+            </form>
+            {% for comment in post.comment_set.all %}
+            <div class="row">
+                {% include "comment_recursive.html" with comment=comment %}
+            </div>
+            {%endfor%}
         </div>
     </div>
+</div>
 {% endfor %}
 {% endblock %}

@@ -1,4 +1,4 @@
-from django.http import HttpResponseRedirect, HttpResponse, HttpResponseNotFound
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponseNotFound, HttpResponseBadRequest
 from django.views.generic.base import View
 from django.views.generic import ListView, CreateView
 from django.urls import reverse_lazy
@@ -42,10 +42,26 @@ class LikeView(LoginRequiredMixin, View):
             self.request.user.socialnet_post_like_set.add(post)
         elif 'comment_id' in request.POST:
             comment = get_object_or_404(Comment, pk=request.POST['comment_id'])
-            self.request.user.socialnet_comment_list_set.add(comment)
+            self.request.user.socialnet_comment_like_set.add(comment)
         else:
             return HttpResponseNotFound()
         return HttpResponse()
+
+
+class CommentView(LoginRequiredMixin, View):
+    def post(self, request):
+        if 'post_id' in request.POST:
+            parent_content = get_object_or_404(Post, pk=request.POST['post_id'])
+        elif 'comment_id' in request.POST:
+            parent_content = get_object_or_404(Comment, pk=request.POST['comment_id'])
+        else:
+            return HttpResponseNotFound()
+        comment_text =  request.POST.get('comment', '').strip()
+        if not comment_text:
+            return HttpResponseBadRequest()
+        comment = Comment(author=request.user, text=comment_text, parent_content=parent_content)
+        comment.save()
+        return HttpResponseRedirect(reverse_lazy('posts'))
 
 
 class UnlikeView(LoginRequiredMixin, View):

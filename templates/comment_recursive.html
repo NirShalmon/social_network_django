@@ -1,0 +1,32 @@
+<div class="media">
+    <div class="media-body">
+        <button class="btn btn-default btn-xs" type="button" data-toggle="collapse" data-target="#collapse{{comment.id}}    " aria-expanded="false" aria-controls="collapseExample">
+            <span class="fa fa-minus" aria-hidden="true"></span>
+        </button>
+        {{comment.author.username}} {{comment.pub_time|timesince}} ago
+        <div class="panel-collapse collapse in" id="collapse{{comment.pk}}">
+
+            <div class="media-body">
+
+                <p>{{comment.text}}</p>
+                <div class="comment-meta">
+                    <a class="" role="button" data-toggle="collapse" href="#replyComment{{comment.id}}" aria-expanded="false" aria-controls="collapseExample">reply</a>
+                </div>
+                <div class="collapse" id="replyComment{{comment.pk}}">
+                    <form method="post" action="/comment/">
+                        <div class="form-group">
+                            <label for="comment">Your Comment</label>
+                            <textarea name="comment" class="form-control" rows="3"></textarea>
+                        </div>
+                        <input type="hidden" name="comment_id" value="{{ comment.pk }}">
+                        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+                        <button type="submit" class="btn btn-primary">Send</button>
+                    </form>
+                </div>
+            </div>
+            {% for subcomment in comment.comment_set.all %}
+            {% include "comment_recursive.html" with comment=subcomment %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
