@@ -1,8 +1,9 @@
-from django.urls import path
+from django.urls import path, reverse_lazy
 from .views import *
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, RedirectView
 
 urlpatterns = [
+    path('', RedirectView.as_view(url=reverse_lazy('about')), name='home'),
     path('posts/', PostListView.as_view(), name='posts'),
     path('new_post/', PostCreateView.as_view(), name='new post'),
     path('like_list/', LikeListView.as_view(), name='likes'),
